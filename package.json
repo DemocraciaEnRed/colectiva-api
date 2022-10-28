@@ -1,0 +1,77 @@
+{
+  "name": "leyesabiertas-core",
+  "version": "1.9.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DemocracyOS/core.git"
+  },
+  "engines": {
+    "node": "^8"
+  },
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon",
+    "init": "node scripts/init.js",
+    "test": "NODE_ENV=test mocha --recursive --timeout 10000",
+    "setup": "NODE_ENV=setup node server",
+    "docs": "./node_modules/.bin/apidoc -i api/ -o docs/api"
+  },
+  "dependencies": {
+    "accepts": "^1.3.7",
+    "ajv-i18n": "^3.4.0",
+    "axios": "^0.18.1",
+    "compression": "^1.7.4",
+    "connect-mongo": "^2.0.3",
+    "cors": "^2.8.5",
+    "crypto-js": "^3.1.9-1",
+    "dotenv": "^5.0.1",
+    "draft-js": "^0.10.5",
+    "express": "^4.17.1",
+    "express-paginate": "^0.3.0",
+    "express-react-views": "^0.10.5",
+    "express-session": "^1.16.2",
+    "express-winston": "^2.6.0",
+    "helmet": "^3.18.0",
+    "http-status": "^1.3.2",
+    "json-diff": "^0.5.4",
+    "json2xls": "^0.1.2",
+    "keycloak-connect": "^4.8.3",
+    "lodash": "^4.17.11",
+    "mongoose": "~5.5.13",
+    "mongoose-immutable": "0.0.2",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-version": "^1.1.0",
+    "nodemailer": "^4.7.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "svg-captcha": "^1.4.0",
+    "timeago.js": "^4.0.0-beta.2",
+    "uuid": "^8.3.1",
+    "winston": "^2.4.4",
+    "winston-mongodb": "^3.0.2"
+  },
+  "devDependencies": {
+    "ajv": "^6.10.1",
+    "apidoc": "^0.17.7",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^4.19.1",
+    "eslint-config-democracyos": "^2.0.2",
+    "faker": "^4.1.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.19.1",
+    "rewire": "^3.0.2",
+    "sinon": "^6.3.5",
+    "sinon-mongoose": "^2.3.0"
+  },
+  "apidoc": {
+    "title": "DemocracyOS v3 API",
+    "url": "api/v1"
+  },
+  "now": {
+    "name": "congreso-api",
+    "alias": "congreso-api",
+    "dotenv": true
+  }
+}

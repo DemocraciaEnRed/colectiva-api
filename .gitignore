@@ -1,0 +1,7 @@
+npm-debug.log*
+# Node Modules are installed should not be uploaded
+node_modules
+# Env variables and values should not be uploadad
+.env
+.env.test
+.env.dev

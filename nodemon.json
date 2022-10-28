@@ -1,0 +1,10 @@
+{
+  "restartable": true,  
+  "verbose": true,
+  "ignore": ["node_modules"],
+  "watch": ["api", "db-api", "models", "services"],
+  "env": {
+    "NODE_ENV": "dev"
+  },
+  "ext": "js json"
+}

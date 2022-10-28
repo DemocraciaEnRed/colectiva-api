@@ -1,0 +1,17 @@
+{
+  "extends": ["democracyos", "democracyos/react"],
+
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "."
+        ]
+      }
+    }
+  },
+
+  "env":{
+    "mocha": true
+  }
+}
