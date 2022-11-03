@@ -1,16 +1,16 @@
 ![Header](docs/header-doc.png)
 
-# Leyes abiertas - Backend 
+# Colectiva - Backend 
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DemocraciaEnRed_leyesabiertas-core&metric=alert_status)](https://sonarcloud.io/dashboard?id=DemocraciaEnRed_leyesabiertas-core)
-[![GitHub license](https://img.shields.io/github/license/DemocraciaEnRed/leyesabiertas-core)](https://github.com/DemocraciaEnRed/leyesabiertas-core/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/DemocraciaEnRed/colectiva-api)](https://github.com/DemocraciaEnRed/colectiva-api/blob/master/LICENSE)
 
-Este es uno de los cuatros modulos que se requieren descargar, hacer setup e instalar cada uno de los repositorios para poder utilizar Leyes Abiertas.
-Para saber mas del conjunto de modulos que compone leyes abiertas, hace [click aqui](https://github.com/DemocraciaEnRed/leyesabiertas) 
+Este es uno de los cuatros modulos que se requieren descargar, hacer setup e instalar cada uno de los repositorios para poder utilizar Colectiva.
+Para saber mas del conjunto de modulos que compone colectiva, hace [click aqui](https://github.com/DemocraciaEnRed/colectiva) 
 
 ---
 
-## Setup leyesabiertas-core
+## Setup colectiva-api
 
 > #### ⚠️ NOTAS IMPORTANTES
 > 
@@ -18,7 +18,7 @@ Para saber mas del conjunto de modulos que compone leyes abiertas, hace [click a
 > - Mongo3.6
 > - Keycloak 4.4.x o 6.0.x
 > 
-> Sobre Mongo3.6, es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "leyesabiertas". No hace falta crear alguna collection, eso lo hace la app en inicio.
+> Sobre Mongo3.6, es necesario que instales mongo 3.6 en tu computadora, con una base de datos llamada "colectiva". No hace falta crear alguna collection, eso lo hace la app en inicio.
 > 
 > Keycloak es un sistema open source de identificación y gestión de acceso de usuarios. Es un sistema complejo y para fines de testing, en [Democracia en Red](https://democraciaenred.org) sabemos que la instalacion de Keycloak puede ser un bloqueo para intenciones de testing. Para eso, comunicate con nosotros y podemos ayudarte a hacer el setup y utilizar nuestro Keycloak de Democracia en Red. Envianos un correo electronico en [mailto:it@democraciaenred.org](it@democraciaenred.org) o contactanos a través de nuestro [Twitter](https://twitter.com/fundacionDER).
 
@@ -27,8 +27,8 @@ Ir a la carpeta del repo y instalar las dependencias.
 
 
 ```
-dev/:$ cd leyesabiertas-core
-dev/leyesabiertas-core:$ npm install
+dev/:$ cd colectiva-api
+dev/colectiva-api:$ npm install
 ```
 
 Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
@@ -36,7 +36,7 @@ Ahora tenemos que crear un archivo `.env` que son nuestras variables de entorno
 ```env
 PORT=4000
 SESSION_SECRET=PleaseCreateASectretHERE
-MONGO_URL=mongodb://localhost/leyesabiertas
+MONGO_URL=mongodb://localhost/colectiva
 AUTH_SERVER_URL=##############TODO
 AUTH_REALM=###################TODO
 AUTH_CLIENT=##################TODO
@@ -46,7 +46,7 @@ NOTIFIER_URL=http://localhost:5000/api
 Comando para ejecutar:
 
 ```
-dev/leyesabiertas-core:$ npm run dev
+dev/colectiva-api:$ npm run dev
 ```
 
 ### Full reference de enviroment vars
