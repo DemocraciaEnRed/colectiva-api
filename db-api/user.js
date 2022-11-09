@@ -8,7 +8,7 @@ const log = require('../services/logger')
 
 const exposeAll = (expose) => {
   if (expose) return null // expose == true then show all
-  else return '-avatar -email -username' // hide sensitive info
+  else return '-avatar -email -username -fields.whatsapp' // hide sensitive info
 }
 
 exports.exposeAll = exposeAll
@@ -23,6 +23,9 @@ exports.create = function create (user) {
 
 exports.get = function get (query, expose) {
   return User.findOne(query).select(exposeAll(expose))
+}
+exports.getUserSession = function get (query) {
+  return User.findOne(query).select('-avatar -email')
 }
 
 // List users

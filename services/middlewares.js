@@ -56,7 +56,7 @@ exports.bindUserToSession = async (req, res, next) => {
         next()
       } else {
         // Find user in database with id from Keycloak
-        let user = await User.get({ keycloak: keycloakId })
+        let user = await User.getUserSession({ keycloak: keycloakId })
         // Check if there is a user
         // console.log(user)
         if (user) {
@@ -69,7 +69,7 @@ exports.bindUserToSession = async (req, res, next) => {
             roles: auth.getRoles(req)
           })
           // Retrieve user  again
-          user = await User.get({ keycloak: keycloakId })
+          user = await User.getUserSession({ keycloak: keycloakId })
           req.session.user = user
           next()
         } else {
