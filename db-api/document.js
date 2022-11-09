@@ -24,6 +24,7 @@ exports.create = async function create (documentData, customForm) {
   )
   // Create a new document
   let documentToSave = {
+    slug: documentData.slug,
     author: documentData.author,
     customForm: customForm._id,
     published: documentData.published
