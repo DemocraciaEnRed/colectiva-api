@@ -11,6 +11,7 @@ const ApoyoSchema = new mongoose.Schema({
 
 // Define `Document` Schema
 const Document = new mongoose.Schema({
+  slug: { type: String, required: true, unique: true },
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   customForm: { type: mongoose.Schema.Types.ObjectId, ref: 'CustomForm' },
   currentVersion: { type: mongoose.Schema.Types.ObjectId, ref: 'DocumentVersion' },

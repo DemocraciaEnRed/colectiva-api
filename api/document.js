@@ -218,6 +218,8 @@ router.route('/captcha-data').get(
   }
 )
 
+// get by id or slug
+
 router.route('/:id')
   /**
    * @api {get} /documents/:id Get
@@ -240,7 +242,16 @@ router.route('/:id')
     middlewares.checkId,
     async (req, res, next) => {
       try {
-        const document = await Document.get({ _id: req.params.id })
+        // const document = await Document.get({ _id: req.params.id })
+        // check if it is an mongo id or a slug
+        let document = null
+        if (req.params.id.length === 24) {
+          document = await Document.get({ _id: req.params.id })
+        } else {
+          document = await Document.get({ slug: req.params.id })
+        }
+        // TODO change all the req.params.id to document.id
+
         // No document?
         if (!document) throw errors.ErrNotFound('Document not found or doesn\'t exist')
         // Check if the user is the author
