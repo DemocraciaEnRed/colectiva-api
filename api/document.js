@@ -141,6 +141,7 @@ router.route('/')
           throw errors.ErrBadRequest('customForm')
         }
         const projectBase = createProjectBase()
+        projectBase.author = req.session.user._id
         console.log('projectBase', projectBase)
         const newDocument = await Document.create(projectBase, customForm)
         // Set closing notification agenda
