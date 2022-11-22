@@ -57,9 +57,16 @@ let userProfileCustomForm = {
         'title': "User's birthday"
       },
       'department': {
-        'type': 'string',
         'title': "User's department",
-        'enum': listOfDepartments
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string',
+            'enum': listOfDepartments
+          }
+        ]
       },
       'tags': {
         'title': "User's tags",
