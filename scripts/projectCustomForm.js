@@ -17,6 +17,9 @@ let projectCustomForm = {
       {
         'fields': [
           'title',
+          'authorFullname',
+          'authorRole',
+          'status',
           'imgCover',
           'youtubeId',
           'customVideoId',
@@ -35,6 +38,18 @@ let projectCustomForm = {
       'title': {
         'type': 'string',
         'title': "Project's title"
+      },
+      'authorFullname': {
+        'type': 'string',
+        'title': "Project's author fullname"
+      },
+      'authorRole': {
+        'type': 'string',
+        'title': "Project's author role"
+      },
+      'status': {
+        'type': 'string',
+        'title': "Project's status"
       },
       'imageCover': {
         'anyof': [
