@@ -93,6 +93,15 @@ router.route('/')
                 false
             )
         }
+        // Enable search by title and authorFullname
+        if (req.query.textFilter && req.query.textFilter !== 'null') {
+          const queryAuthor = req.query.textFilter.toLowerCase()
+          results = results.filter((doc) => {
+            const nameAndTitle = `${doc.currentVersion.content.authorFullname} ${doc.currentVersion.content.title}`.toLowerCase()
+            console.log(nameAndTitle)
+            return nameAndTitle.includes(queryAuthor)
+          })
+        }
         let auxOne = parseInt(results.length / paginate.limit)
         let auxTwo = results.length % paginate.limit
         if (auxTwo) {
