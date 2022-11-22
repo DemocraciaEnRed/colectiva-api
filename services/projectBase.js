@@ -77,6 +77,9 @@ let projectBase = {
   'customForm': 'project-form',
   'content': {
     'title': 'Mi nuevo proyecto',
+    'authorFullname': null,
+    'authorRole': null,
+    'status': null,
     'imageCover': null,
     'youtubeId': 'r9hZuc72C48',
     'fundation': {
