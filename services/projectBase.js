@@ -79,6 +79,8 @@ let projectBase = {
     'title': 'Mi nuevo proyecto',
     'authorFullname': null,
     'authorRole': null,
+    'authorAvatar': null,
+    'authorBio': null,
     'status': null,
     'imageCover': null,
     'youtubeId': 'r9hZuc72C48',
