@@ -19,6 +19,8 @@ let projectCustomForm = {
           'title',
           'authorFullname',
           'authorRole',
+          'authorAvatar',
+          'authorBio',
           'status',
           'imgCover',
           'youtubeId',
@@ -46,6 +48,22 @@ let projectCustomForm = {
       'authorRole': {
         'type': 'string',
         'title': "Project's author role"
+      },
+      'authorAvatar': {
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string'
+          }
+        ],
+        'title': 'URL for the avatar of the author',
+        'format': 'uri'
+      },
+      'authorBio': {
+        'type': 'string',
+        'title': "Project's author bio"
       },
       'status': {
         'type': 'string',
