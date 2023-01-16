@@ -42,11 +42,25 @@ let projectCustomForm = {
         'title': "Project's title"
       },
       'authorFullname': {
-        'type': 'string',
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string'
+          }
+        ],
         'title': "Project's author fullname"
       },
       'authorRole': {
-        'type': 'string',
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string'
+          }
+        ],
         'title': "Project's author role"
       },
       'authorAvatar': {
@@ -62,11 +76,25 @@ let projectCustomForm = {
         'format': 'uri'
       },
       'authorBio': {
-        'type': 'string',
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string'
+          }
+        ],
         'title': "Project's author bio"
       },
       'status': {
-        'type': 'string',
+        'anyof': [
+          {
+            'type': 'null'
+          },
+          {
+            'type': 'string'
+          }
+        ],
         'title': "Project's status"
       },
       'imageCover': {
