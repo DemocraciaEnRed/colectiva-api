@@ -92,7 +92,18 @@ let projectCustomForm = {
             'type': 'null'
           },
           {
-            'type': 'string'
+            'type': 'string',
+            'enum': [
+              '1-en-construccion',
+              '2-radicacion',
+              '3-primer-debate',
+              '4-segundo-debate',
+              '5-tercer-debate',
+              '6-cuarto-debate',
+              '7-sancion-presidencial',
+              '8-en-revision',
+              '9-es-ley'
+            ]
           }
         ],
         'title': "Project's status"

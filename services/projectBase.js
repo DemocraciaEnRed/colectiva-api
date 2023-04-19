@@ -81,7 +81,7 @@ let projectBase = {
     'authorRole': null,
     'authorAvatar': null,
     'authorBio': null,
-    'status': null,
+    'status': '1-en-construccion',
     'imageCover': null,
     'youtubeId': 'r9hZuc72C48',
     'fundation': {
