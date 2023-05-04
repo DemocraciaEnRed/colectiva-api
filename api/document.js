@@ -58,7 +58,27 @@ router.route('/')
           limit: req.query.limit || 10,
           page: req.query.page || 1
         }
-        results = await Document.retrieve({ published: true }, sort)
+        // results = await Document.retrieve({ published: true }, sort)
+
+        if (req.session.user) {
+
+          // get the documents that:
+          // - are published
+          // - private are false (public) OR private are true AND the user id (if logged in) is in the allowed array
+          results = await Document.retrieve({
+            published: true,
+            $or: [
+              { private: false },
+              { private: true, allowed: { $in: [ObjectId(req.session.user._id)] } }
+            ]
+          }, sort)
+        } else {
+          results = await Document.retrieve({ published: true, private: false }, sort)
+        }
+
+
+
+
         let today = new Date()
         results.forEach((doc) => {
           doc.closed = today > new Date(doc.currentVersion.content.closingDate)
@@ -254,6 +274,7 @@ router.route('/:id')
    */
   .get(
     middlewares.checkId,
+    middlewares.isPrivateAndHasAccess,
     async (req, res, next) => {
       try {
         // const document = await Document.get({ _id: req.params.id })
@@ -279,6 +300,7 @@ router.route('/:id')
             throw errors.ErrForbidden
           }
         }
+          
         document.closed = isClosed
         let payload = {
           document: document,
@@ -389,6 +411,7 @@ router.route('/:id')
 router.route('/:id/version/:version')
   .get(
     middlewares.checkId,
+    middlewares.isPrivateAndHasAccess,
     async (req, res, next) => {
       try {
         // let query = {
@@ -445,6 +468,7 @@ router.route('/:id/comments')
      */
   .get(
     middlewares.checkId,
+    middlewares.isPrivateAndHasAccess,
     async (req, res, next) => {
       try {
         // If there are no query string, then throw an error
@@ -516,6 +540,7 @@ router.route('/:id/comments')
    */
   .post(
     middlewares.checkId,
+    middlewares.isPrivateAndHasAccess,
     auth.keycloak.protect(),
     async (req, res, next) => {
       try {
@@ -609,6 +634,7 @@ router.route('/:id/comments/:idComment/like')
    *
    */
   .post(
+    middlewares.isPrivateAndHasAccess,
     auth.keycloak.protect(),
     async (req, res, next) => {
       try {
@@ -644,6 +670,7 @@ router.route('/:id/comments/:idComment/like')
 
 router.route('/:id/comments/:idComment')
   .delete(
+    middlewares.isPrivateAndHasAccess,
     auth.keycloak.protect(),
     async (req, res, next) => {
       try {
@@ -670,6 +697,7 @@ router.route('/:id/comments/:idComment')
 router.route('/:id/comments/:idComment/reply')
   .post(
     middlewares.checkId,
+    middlewares.isPrivateAndHasAccess,
     auth.keycloak.protect('realm:accountable'),
     async (req, res, next) => {
       try {
@@ -689,8 +717,9 @@ router.route('/:id/comments/:idComment/reply')
   )
 
 router.route('/:id/apoyar').post(
-  auth.keycloak.protect(),
   middlewares.checkId,
+  middlewares.isPrivateAndHasAccess,
+  auth.keycloak.protect(),
   async (req, res, next) => {
     try {
       let documentId = req.params.id
@@ -704,6 +733,7 @@ router.route('/:id/apoyar').post(
 )
 router.route('/:id/apoyar-anon').post(
   middlewares.checkId,
+  middlewares.isPrivateAndHasAccess,
   async (req, res, next) => {
     try {
       const documentId = req.params.id
