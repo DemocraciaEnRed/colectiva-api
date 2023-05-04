@@ -3,6 +3,7 @@ const Community = require('../models/community')
 const dbCommunity = require('../db-api/community')
 const CustomForm = require('../models/customForm')
 const User = require('../models/user')
+const Document = require('../models/document')
 const DocumentTag = require('../models/documentTag')
 const DocumentVersion = require('../models/documentVersion')
 const dbCustomForm = require('../db-api/customForm')
@@ -27,7 +28,6 @@ let communityData = {
   }
 }
 
-
 class DatabaseNotEmpty extends Error { }
 class StopSetup extends Error { }
 
@@ -47,6 +47,13 @@ async function create () {
 async function checkDB () {
   log.debug('* Checking if database has data on it')
   let community = await Community.findOne({})
+  let documents = await Document.find({ $or: [{ private: { $exists: false } }, { allowed: { $exists: false } }] })
+  if (documents.length) {
+    log.warn(`2023-05-04 Found ${documents.length} Documents without "private" and "allowed" fields found. Fixing...`)
+    await setUpPrivateAndAllowedFieldsDocuments()
+  } else {
+    log.debug('* 2023-05-04 There are no documents without "private" and "allowed" fields')
+  }
   let customForm = await CustomForm.findOne({})
   if (customForm) {
     log.debug('* There is at least one customForm already on the DB.')
@@ -57,7 +64,18 @@ async function checkDB () {
     log.warn('Database is not empty. Setup will not run.')
     throw new DatabaseNotEmpty('Skipping new setup because there is data already in the DB')
   }
+  // find all the documents without "private" and "allowed" fields
   log.debug('--> DONE: Checking DB')
+}
+
+async function setUpPrivateAndAllowedFieldsDocuments () {
+  let documents = await Document.find({ $or: [{ private: { $exists: false } }, { allowed: { $exists: false } }] })
+  for (let document of documents) {
+    document.private = false
+    document.allowed = []
+    await document.save()
+  }
+  log.debug('--> DONE: setUpPrivateAndAllowedFieldsDocuments')
 }
 
 async function updateCustomForms () {
