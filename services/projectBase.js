@@ -75,6 +75,8 @@ let projectBase = {
   'closed': false,
   'slug': null,
   'customForm': 'project-form',
+  'private': false,
+  'allowed': [],
   'content': {
     'title': 'Mi nuevo proyecto',
     'authorFullname': null,

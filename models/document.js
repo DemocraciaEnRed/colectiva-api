@@ -18,6 +18,9 @@ const Document = new mongoose.Schema({
   published: { type: Boolean, required: true, default: false },
   publishedMailSent: { type: Boolean },
   commentsCount: { type: Number, default: 0 },
+  private: { type: Boolean, required: true, default: false },
+  // users that can view this document
+  allowed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', default: [] }],
   apoyos: [ApoyoSchema]
 }, {
   timestamps: true

@@ -93,6 +93,12 @@ exports.update = async function update (id, document) {
     .then((_document) => {
       // Founded?
       if (!_document) throw errors.ErrNotFound('Document to update not found')
+      // for document.allowed (if exists), push it to the document
+      // it needs a different treatment because it's an special kind of object/array from mongo
+      if (document.allowed) {
+        _document.allowed = document.allowed
+      }
+      delete document.allowed
       // Deep merge the change(s) with the document
       let documentToSave = merge(_document, document)
       // Save!
