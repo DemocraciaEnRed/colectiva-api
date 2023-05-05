@@ -69,7 +69,8 @@ router.route('/')
             published: true,
             $or: [
               { private: false },
-              { private: true, allowed: { $in: [ObjectId(req.session.user._id)] } }
+              { private: true, allowed: { $in: [ObjectId(req.session.user._id)] } },
+              { author: ObjectId(req.session.user._id) }
             ]
           }, sort)
         } else {
@@ -357,8 +358,10 @@ router.route('/:id')
         }
         let newDataDocument = {
           published: req.body.published,
-          private: req.body.content.private,
           closed: req.body.closed
+        }
+        if (req.body.content && req.body.content.private) {
+          newDataDocument.private = req.body.content.private
         }
         if (req.body.content && req.body.content.allowed) {
           newDataDocument.allowed = req.body.content.allowed
