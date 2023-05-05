@@ -22,6 +22,8 @@ let projectCustomForm = {
           'authorAvatar',
           'authorBio',
           'status',
+          'private',
+          'allowed',
           'imgCover',
           'youtubeId',
           'customVideoId',
@@ -107,6 +109,17 @@ let projectCustomForm = {
           }
         ],
         'title': "Project's status"
+      },
+      'private': {
+        'type': 'boolean',
+        'title': 'Private project'
+      },
+      'allowed': {
+        'type': 'array',
+        'title': 'Allowed users',
+        'items': {
+          'type': 'string'
+        }
       },
       'imageCover': {
         'anyof': [

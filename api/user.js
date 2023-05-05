@@ -68,6 +68,63 @@ router.route('/me')
       }
     })
 
+router.route('/list')
+  .get(
+    auth.keycloak.protect(['realm:accountable', 'realm:admin']),
+    async (req, res, next) => {
+      try {
+        // get the query param ids that its a string of ids separated by commas
+        const ids = req.query.ids.split(',')
+        const results = await User.list({ _id: { $in: ids } }, { limit: req.query.limit, page: 1 }, true)
+        const filteredResults = results.docs.map((user) => {
+          return {
+            _id: user._id,
+            email: user.email,
+            fullname: user.fullname,
+            avatar: user.avatar,
+            isAccountable: user.roles.includes('accountable')
+          }
+        })
+        res.status(status.OK).json(filteredResults)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
+
+router.route('/search')
+  .get(
+    auth.keycloak.protect(['realm:accountable', 'realm:admin']),
+    async (req, res, next) => {
+      try {
+        if (!req.query.name && !req.query.email) return res.status(status.OK).json([])
+        let results = null
+        if (req.query.name) {
+          results = await User.list({ fullname: { $regex: req.query.name, $options: 'i' } }, { limit: req.query.limit, page: 1 }, true)
+        }
+        if (req.query.email) {
+          results = await User.list({ email: { $regex: req.query.email, $options: 'i' } }, { limit: req.query.limit, page: 1 }, true)
+        }
+
+        if (!results) return res.status(status.OK).json([])
+
+        const filteredResults = results.docs.map((user) => {
+          return {
+            _id: user._id,
+            email: user.email,
+            fullname: user.fullname,
+            avatar: user.avatar,
+            isAccountable: user.roles.includes('accountable')
+          }
+        })
+
+        res.status(status.OK).json(filteredResults)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
+
 router.route('/:id/avatar')
 /**
    * @api {get} /users/:id Gets a user

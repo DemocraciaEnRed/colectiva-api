@@ -357,7 +357,11 @@ router.route('/:id')
         }
         let newDataDocument = {
           published: req.body.published,
+          private: req.body.content.private,
           closed: req.body.closed
+        }
+        if (req.body.content && req.body.content.allowed) {
+          newDataDocument.allowed = req.body.content.allowed
         }
         // Retrieve the version of the customForm that the document follows
         const customForm = await CustomForm.get({ _id: document.customForm })
